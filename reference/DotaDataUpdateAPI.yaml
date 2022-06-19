@@ -38,6 +38,8 @@ paths:
       description: Returns latest Dota patch
 components:
   schemas:
+    AdditionalProperties:
+      false
     DotaHero:
       type: object
       properties:
