@@ -1,0 +1,119 @@
+openapi: 3.1.0
+x-stoplight:
+  id: stuf38fx0a5yx
+info:
+  title: DotaDataUpdateAPI
+  version: '1.0'
+  description: Used to fill Database with up to date info about the game
+  contact:
+    name: Bogdan Yarotsky
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /dota/update:
+    post:
+      summary: ''
+      operationId: post-dota-update
+      responses:
+        '200':
+          description: OK
+      description: Add new Dota Update to the database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DotaUpdate'
+  /dota/patch:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DotaPatch'
+      operationId: get-dota-patch
+      description: Returns latest Dota patch
+components:
+  schemas:
+    DotaHero:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        localized_name:
+          type: string
+      x-examples:
+        example-1:
+          id: 0
+          name: string
+          localized_name: string
+      description: Info about Hero from the game
+    DotaItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        localized_name:
+          type: string
+        cost:
+          type: integer
+      x-examples:
+        example-1:
+          id: 0
+          name: string
+          localized_name: string
+          cost: 0
+      description: Info about Item from the game
+    DotaUpdate:
+      type: object
+      x-examples:
+        example-1:
+          patch: string
+          heroes:
+            - id: 0
+              name: string
+              localized_name: string
+          items:
+            - id: 0
+              name: string
+              localized_name: string
+              cost: 0
+      properties:
+        patch:
+          type: string
+        heroes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DotaHero'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DotaItem'
+      examples:
+        - patch: string
+          heroes:
+            - id: 0
+              name: string
+              localized_name: string
+          items:
+            - id: 0
+              name: string
+              localized_name: string
+              cost: 0
+    DotaPatch:
+      title: DotaPatch
+      x-stoplight:
+        id: 7c0561wiybltm
+      type: object
+      properties:
+        version:
+          type: string
+        datetime:
+          type: string
