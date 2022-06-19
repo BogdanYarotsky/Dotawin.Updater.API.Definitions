@@ -38,8 +38,6 @@ paths:
       description: Returns latest Dota patch
 components:
   schemas:
-    AdditionalProperties:
-      false
     DotaHero:
       type: object
       properties:
@@ -55,6 +53,7 @@ components:
           name: string
           localized_name: string
       description: Info about Hero from the game
+      additionalProperties: false
     DotaItem:
       type: object
       properties:
@@ -73,6 +72,7 @@ components:
           localized_name: string
           cost: 0
       description: Info about Item from the game
+      additionalProperties: false
     DotaUpdate:
       type: object
       x-examples:
@@ -109,6 +109,7 @@ components:
               name: string
               localized_name: string
               cost: 0
+      additionalProperties: false
     DotaPatch:
       title: DotaPatch
       x-stoplight:
@@ -119,3 +120,4 @@ components:
           type: string
         datetime:
           type: string
+      additionalProperties: false
