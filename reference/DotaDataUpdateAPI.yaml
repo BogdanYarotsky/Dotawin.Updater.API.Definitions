@@ -40,13 +40,6 @@ components:
   schemas:
     DotaHero:
       type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        localized_name:
-          type: string
       x-examples:
         example-1:
           id: 0
@@ -54,17 +47,15 @@ components:
           localized_name: string
       description: Info about Hero from the game
       additionalProperties: false
-    DotaItem:
-      type: object
       properties:
-        id:
+        gameId:
           type: integer
         name:
           type: string
-        localized_name:
+        internalName:
           type: string
-        cost:
-          type: integer
+    DotaItem:
+      type: object
       x-examples:
         example-1:
           id: 0
@@ -73,6 +64,15 @@ components:
           cost: 0
       description: Info about Item from the game
       additionalProperties: false
+      properties:
+        gameId:
+          type: integer
+        name:
+          type: string
+        internalName:
+          type: string
+        cost:
+          type: integer
     DotaUpdate:
       type: object
       x-examples:
@@ -115,9 +115,9 @@ components:
       x-stoplight:
         id: 7c0561wiybltm
       type: object
-      properties:
-        version:
-          type: string
-        datetime:
-          type: string
       additionalProperties: false
+      properties:
+        patch:
+          type: string
+        date:
+          type: string
