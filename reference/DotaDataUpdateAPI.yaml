@@ -10,20 +10,21 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /dota/update:
+  /update:
     post:
       summary: ''
       operationId: post-dota-update
-      responses:
-        '200':
-          description: OK
       description: Add new Dota Update to the database
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DotaUpdate'
-  /dota/patch:
+              $ref: '#/components/schemas/Update'
+      responses:
+        '200':
+          description: OK
+    parameters: []
+  /patch:
     get:
       summary: Your GET endpoint
       tags: []
@@ -33,12 +34,90 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DotaPatch'
+                $ref: '#/components/schemas/Patch'
       operationId: get-dota-patch
       description: Returns latest Dota patch
+    parameters: []
+  /heroes:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hero'
+      operationId: get-dota-heroes
+    parameters: []
+  '/heroes/{gameId}':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hero'
+      operationId: get-dota-hero-gameId
+  /items:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+      operationId: get-dota-items
+    parameters: []
+  '/items/{gameId}':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+      operationId: get-dota-items-gameId
 components:
   schemas:
-    DotaHero:
+    Patch:
+      title: DotaPatch
+      x-stoplight:
+        id: 7c0561wiybltm
+      type: object
+      additionalProperties: false
+      properties:
+        patch:
+          type: string
+        date:
+          type: string
+    Hero:
       type: object
       x-examples:
         example-1:
@@ -54,7 +133,8 @@ components:
           type: string
         internalName:
           type: string
-    DotaItem:
+      title: DotaHeroDto
+    Item:
       type: object
       x-examples:
         example-1:
@@ -73,7 +153,7 @@ components:
           type: string
         cost:
           type: integer
-    DotaUpdate:
+    Update:
       type: object
       x-examples:
         example-1:
@@ -87,17 +167,6 @@ components:
               name: string
               localized_name: string
               cost: 0
-      properties:
-        patch:
-          type: string
-        heroes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DotaHero'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/DotaItem'
       examples:
         - patch: string
           heroes:
@@ -110,14 +179,14 @@ components:
               localized_name: string
               cost: 0
       additionalProperties: false
-    DotaPatch:
-      title: DotaPatch
-      x-stoplight:
-        id: 7c0561wiybltm
-      type: object
-      additionalProperties: false
       properties:
         patch:
-          type: string
-        date:
-          type: string
+          $ref: '#/components/schemas/DotaPatchDto'
+        heroes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DotaHeroDto'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DotaItemDto'
