@@ -181,12 +181,12 @@ components:
       additionalProperties: false
       properties:
         patch:
-          $ref: '#/components/schemas/DotaPatchDto'
+          $ref: '#/components/schemas/Patch'
         heroes:
           type: array
           items:
-            $ref: '#/components/schemas/DotaHeroDto'
+            $ref: '#/components/schemas/Hero'
         items:
           type: array
           items:
-            $ref: '#/components/schemas/DotaItemDto'
+            $ref: '#/components/schemas/Item'
